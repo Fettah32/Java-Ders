@@ -93,7 +93,7 @@ public class Lambda_01 {//okul projesinde listele vb lamda expression ile yapini
                 .filter(t -> t % 2 != 0) // tek olan rakamlari filtreledim
                 .map(t -> t * t) // her tek sayinin karesi alindi
                 .sorted(Comparator.reverseOrder()) // buyukten kucuge siralandi, normal akista kucukten buyuge siralanir
-                .forEach(Methodlarim::yazdir); // seed method kullanilarak method cagirildi
+                .forEach(Methodlarim::yanYanaYazdir); // seed method kullanilarak method cagirildi
 
     }
 
@@ -116,7 +116,7 @@ public class Lambda_01 {//okul projesinde listele vb lamda expression ile yapini
                         .comparing(t -> t.toString() // her bir eleman stringe cevrildi
                                 .charAt(t.toString().length() - 1)) // son karakteri charAt ile alindi
                         .reversed()) // son harfine gore tersine siralandi
-                .forEach(Methodlarim::yazdir); // yazdirildi
+                .forEach(Methodlarim::yanYanaYazdir); // yazdirildi
 
 
     }

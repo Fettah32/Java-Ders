@@ -3,6 +3,7 @@ package lambda_practice;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,7 +44,7 @@ public class Lambda_02_DosyaOkuma { // yolu src/lambda_practice/siirler.txt
 
         //2.Yol
         Files.lines(Path.of("src/lambda_practice/siirler.txt")).map(String::toUpperCase).
-               forEach(Methodlarim::yazdir);
+               forEach(Methodlarim::altAltaYazdir);
 
 
 
@@ -60,30 +61,66 @@ public class Lambda_02_DosyaOkuma { // yolu src/lambda_practice/siirler.txt
                 .count()); // kac tane hatir varsa hepsinin sayisi yazdirildi
 
 
-        System.out.println("\nTASK 3  --> siirler.txt dosyasindaki ayni kelimeleri cikartarak y yazdiriniz. -->  ");
+        System.out.println("\nTASK 3  --> siirler.txt dosyasindaki ayni kelimeleri cikartarak yazdiriniz. -->  ");
 
+        System.out.println(Files.lines(muti).
+                map(t -> t.split(" ")). // her bir kelime ayri ayri alindi
+                flatMap(Arrays::stream). // duz bir yapiya yani tek bir array'e cevirildi
+                distinct().
+                collect(Collectors.toList()));
+        System.out.println();
 
+        // 2.Yol
+        System.out.println(Files.lines(muti).
+                map(t -> t.split(" ")).
+                flatMap(Arrays::stream).
+                collect(Collectors.toSet()));
 
 
         System.out.println("\nTASK 4 --> siirler.txt dosyasindaki tum kelimeleri natural order  yazdiriniz. -->  ");
 
+        Files.lines(muti).map(t -> t.toLowerCase().
+                split(" ")).
+                flatMap(Arrays::stream).
+                sorted().
+                forEach(Methodlarim::yanYanaYazdir);
 
 
-        System.out.println("\nTASK 5 --> siirler.txt dosyasinda basari kelimesinin kac kere gectigini  yazdiriniz. -->  ");
 
+        System.out.println("\nTASK 5 --> siirler.txt dosyasinda gonlum kelimesinin kac kere gectigini  yazdiriniz. -->  ");
+
+        System.out.println(Files.lines(muti).
+                map(t -> t.toLowerCase().
+                        split(" ")).
+                flatMap(Arrays::stream).
+                filter(t -> t.contains("gonlum")).count());
 
 
         System.out.println("\nTASK 6 --> siirler.txt dosyasinda a harfi gecen kelimelerin sayisini ekrana yazdiran programi yazdiriniz. -->  ");
+
+        System.out.println(Files.lines(muti).
+                map(t -> t.toLowerCase().
+                        split(" ")).
+                flatMap(Arrays::stream).
+                filter(t -> t.contains("a")).count());
 
 
 
         System.out.println("\nTASK 7 --> siirler.txt dosyasinda a harfi gecen kelimeler yazdiriniz. -->  ");
 
-
+        System.out.println(Files.lines(muti).
+                map(t -> t.toLowerCase().
+                        split(" ")).
+                flatMap(Arrays::stream).
+                filter(t -> t.contains("a")).
+                collect(Collectors.toList()));
 
 
         System.out.println("\nTASK 8 --> siirler.txt dosyasinda kac /farklı harf kullanildigini  yazdiriniz. -->  ");
 
+
+        System.out.println(Files.lines(muti).map(t -> t.replaceAll("\\W", "").replaceAll("\\d", "").split(""))
+                .flatMap(Arrays::stream).distinct().count());
 
 
         System.out.println("\nTASK 9 --> siirler.txt dosyasinda kac farkli kelime kullanildigini  yazdiriniz. -->  ");
